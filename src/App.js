@@ -2,6 +2,12 @@ import "./App.css";
 import Score from "./Components/Score.js";
 import Ranking from "./Components/Ranking.js";
 
+import ReactDOM from "react-dom";
+
+function Render() {
+  ReactDOM.render(<App />, document.getElementById("root"));
+}
+
 function App() {
   return (
     <div className="App">
@@ -14,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+export default Render;
