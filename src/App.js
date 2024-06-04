@@ -12,10 +12,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>SPH4U Game Score Board</p>
+        <p className="App-header_text">SPH4U Game Score Board</p>
       </header>
-      <Score></Score>
-      <Ranking></Ranking>
+      <div className="App-body1">
+        <Score></Score>
+      </div>
+      <div className="App-body2">
+        <Ranking></Ranking>
+      </div>
     </div>
   );
 }

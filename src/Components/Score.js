@@ -3,6 +3,8 @@ import React from "react";
 
 import PocketBase from "pocketbase";
 
+import "./style/Score.css";
+
 function Score() {
   const [userAName, setUserAName] = useState();
   const [userBName, setUserBName] = useState();
@@ -29,6 +31,16 @@ function Score() {
 
   const pb = new PocketBase("http://127.0.0.1:8090");
   pb.autoCancellation(false);
+
+  const onClickConfirm = () => {
+    if (!userAName || !userBName) {
+      alert("Input players' name!");
+      setUserAName();
+      setUserBName();
+    } else {
+      setConfirm("confirmed");
+    }
+  };
 
   const postA = async () => {
     const data = {
@@ -69,11 +81,12 @@ function Score() {
   if (!userAName || !userBName || confirm !== "confirmed") {
     return (
       <>
-        <h1>Enter Players' Name</h1>
+        <h1 className="score_initial_title">Enter Players' Name</h1>
 
         <label className="score_user_name">
-          Plyer A:
+          Player A:
           <input
+            className="score_initial_playername_input"
             type="text"
             value={userAName}
             onChange={(e) => setUserAName(e.target.value)}
@@ -81,14 +94,17 @@ function Score() {
         </label>
 
         <label className="score_user_name">
-          Plyer B:
+          Player B:
           <input
+            className="score_initial_playername_input"
             type="text"
             value={userBName}
             onChange={(e) => setUserBName(e.target.value)}
           />
         </label>
-        <button onClick={() => setConfirm("confirmed")}>Start</button>
+        <button className="score_button_start" onClick={onClickConfirm}>
+          Start
+        </button>
       </>
     );
   }
@@ -96,188 +112,156 @@ function Score() {
   if (gameProcess !== "Finish")
     return (
       <>
-        <div className="score_user_seperate">
-          <h2>{userAName}'s Score</h2>
-          <h3>{userAScoreTotal}</h3>
-          <div className="score_input">
-            <div className="score_each_round">
-              {currentRound === 1 && (
-                <div className="score_user_name">
-                  Round 1:
-                  <p>Round score: {userAScore1}</p>
-                  {/*<input*/}
-                  {/*  type="number"*/}
-                  {/*  value={userAScore1}*/}
-                  {/*  onChange={(e) => setUserAScore1(e.target.value)}*/}
-                  {/*/>*/}
-                  <button onClick={() => setUserAScore1(userAScore1 + 0)}>
-                    0
-                  </button>
-                  <button onClick={() => setUserAScore1(userAScore1 + 5)}>
-                    5
-                  </button>
-                  <button onClick={() => setUserAScore1(userAScore1 + 10)}>
-                    10
-                  </button>
-                  <button onClick={() => setUserAScore1(userAScore1 + 15)}>
-                    15
-                  </button>
-                  <button onClick={() => setUserAScore1(userAScore1 + 20)}>
-                    20
-                  </button>
-                  <button onClick={() => setUserAScore1(0)}>reset</button>
-                </div>
-              )}
-              {currentRound === 2 && (
-                <div className="score_user_name">
-                  Round 2:
-                  <p>Round score: {userAScore2}</p>
-                  {/*<input*/}
-                  {/*  type="number"*/}
-                  {/*  value={userAScore2}*/}
-                  {/*  onChange={(e) => setUserAScore2(e.target.value)}*/}
-                  {/*/>*/}
-                  <button onClick={() => setUserAScore2(userAScore2 + 0)}>
-                    0
-                  </button>
-                  <button onClick={() => setUserAScore2(userAScore2 + 5)}>
-                    5
-                  </button>
-                  <button onClick={() => setUserAScore2(userAScore2 + 10)}>
-                    10
-                  </button>
-                  <button onClick={() => setUserAScore2(userAScore2 + 15)}>
-                    15
-                  </button>
-                  <button onClick={() => setUserAScore2(userAScore2 + 20)}>
-                    20
-                  </button>
-                  <button onClick={() => setUserAScore2(0)}>reset</button>
-                </div>
-              )}
-              {currentRound === 3 && (
-                <div className="score_user_name">
-                  Round 3:
-                  <p>Round score: {userAScore3}</p>
-                  {/*<input*/}
-                  {/*  type="number"*/}
-                  {/*  value={userAScore3}*/}
-                  {/*  onChange={(e) => setUserAScore3(e.target.value)}*/}
-                  {/*/>*/}
-                  <button onClick={() => setUserAScore3(userAScore3 + 0)}>
-                    0
-                  </button>
-                  <button onClick={() => setUserAScore3(userAScore3 + 5)}>
-                    5
-                  </button>
-                  <button onClick={() => setUserAScore3(userAScore3 + 10)}>
-                    10
-                  </button>
-                  <button onClick={() => setUserAScore3(userAScore3 + 15)}>
-                    15
-                  </button>
-                  <button onClick={() => setUserAScore3(userAScore3 + 20)}>
-                    20
-                  </button>
-                  <button onClick={() => setUserAScore3(0)}>reset</button>
-                </div>
-              )}
+        <h1 className="score_round_display">Round {currentRound}</h1>
+        <div className="score_inprogress_score_display">
+          <div className="score_user_seperate">
+            <p className="score_user_totalscore">{userAName}'s Score</p>
+            <p className="score_user_totalscore">{userAScoreTotal}</p>
+            <div className="score_input">
+              <div className="score_each_round">
+                {currentRound === 1 && (
+                  <div className="score_user_name">
+                    <p>Round score: {userAScore1}</p>
+                    <button onClick={() => setUserAScore1(userAScore1 + 0)}>
+                      0 pt
+                    </button>
+                    <button onClick={() => setUserAScore1(userAScore1 + 5)}>
+                      5 pt
+                    </button>
+                    <button onClick={() => setUserAScore1(userAScore1 + 10)}>
+                      10 pt
+                    </button>
+                    <button onClick={() => setUserAScore1(userAScore1 + 15)}>
+                      15 pt
+                    </button>
+                    <button onClick={() => setUserAScore1(userAScore1 + 20)}>
+                      20 pt
+                    </button>
+                    <button onClick={() => setUserAScore1(0)}>reset</button>
+                  </div>
+                )}
+                {currentRound === 2 && (
+                  <div className="score_user_name">
+                    <p>Round score: {userAScore2}</p>
+                    <button onClick={() => setUserAScore2(userAScore2 + 0)}>
+                      0 pt
+                    </button>
+                    <button onClick={() => setUserAScore2(userAScore2 + 5)}>
+                      5 pt
+                    </button>
+                    <button onClick={() => setUserAScore2(userAScore2 + 10)}>
+                      10 pt
+                    </button>
+                    <button onClick={() => setUserAScore2(userAScore2 + 15)}>
+                      15 pt
+                    </button>
+                    <button onClick={() => setUserAScore2(userAScore2 + 20)}>
+                      20 pt
+                    </button>
+                    <button onClick={() => setUserAScore2(0)}>reset</button>
+                  </div>
+                )}
+                {currentRound === 3 && (
+                  <div className="score_user_name">
+                    <p>Round score: {userAScore3}</p>
+                    <button onClick={() => setUserAScore3(userAScore3 + 0)}>
+                      0 pt
+                    </button>
+                    <button onClick={() => setUserAScore3(userAScore3 + 5)}>
+                      5 pt
+                    </button>
+                    <button onClick={() => setUserAScore3(userAScore3 + 10)}>
+                      10 pt
+                    </button>
+                    <button onClick={() => setUserAScore3(userAScore3 + 15)}>
+                      15 pt
+                    </button>
+                    <button onClick={() => setUserAScore3(userAScore3 + 20)}>
+                      20 pt
+                    </button>
+                    <button onClick={() => setUserAScore3(0)}>reset</button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="score_user_seperate">
-          <h2>{userBName}'s Score</h2>
-          <h3>{userBScoreTotal}</h3>
-          <div className="score_input">
-            <div className="score_each_round">
-              {currentRound === 1 && (
-                <div className="score_user_name">
-                  Round 1:
-                  <p>Round score: {userBScore1}</p>
-                  {/*<input*/}
-                  {/*  type="number"*/}
-                  {/*  value={userBScore1}*/}
-                  {/*  onChange={(e) => setUserBScore1(e.target.value)}*/}
-                  {/*/>*/}
-                  <button onClick={() => setUserBScore1(userBScore1 + 0)}>
-                    0
-                  </button>
-                  <button onClick={() => setUserBScore1(userBScore1 + 5)}>
-                    5
-                  </button>
-                  <button onClick={() => setUserBScore1(userBScore1 + 10)}>
-                    10
-                  </button>
-                  <button onClick={() => setUserBScore1(userBScore1 + 15)}>
-                    15
-                  </button>
-                  <button onClick={() => setUserBScore1(userBScore1 + 20)}>
-                    20
-                  </button>
-                  <button onClick={() => setUserBScore1(0)}>reset</button>
-                </div>
-              )}
-              {currentRound === 2 && (
-                <div className="score_user_name">
-                  Round 2:
-                  <p>Round score: {userBScore2}</p>
-                  {/*<input*/}
-                  {/*  type="number"*/}
-                  {/*  value={userBScore2}*/}
-                  {/*  onChange={(e) => setUserBScore2(e.target.value)}*/}
-                  {/*/>*/}
-                  <button onClick={() => setUserBScore2(userBScore2 + 0)}>
-                    0
-                  </button>
-                  <button onClick={() => setUserBScore2(userBScore2 + 5)}>
-                    5
-                  </button>
-                  <button onClick={() => setUserBScore2(userBScore2 + 10)}>
-                    10
-                  </button>
-                  <button onClick={() => setUserBScore2(userBScore2 + 15)}>
-                    15
-                  </button>
-                  <button onClick={() => setUserBScore2(userBScore2 + 20)}>
-                    20
-                  </button>
-                  <button onClick={() => setUserBScore2(0)}>reset</button>
-                </div>
-              )}
-              {currentRound === 3 && (
-                <div className="score_user_name">
-                  Round 3:
-                  <p>Round score: {userBScore3}</p>
-                  {/*<input*/}
-                  {/*  type="number"*/}
-                  {/*  value={userBScore3}*/}
-                  {/*  onChange={(e) => setUserBScore3(e.target.value)}*/}
-                  {/*/>*/}
-                  <button onClick={() => setUserBScore3(userBScore3 + 0)}>
-                    0
-                  </button>
-                  <button onClick={() => setUserBScore3(userBScore3 + 5)}>
-                    5
-                  </button>
-                  <button onClick={() => setUserBScore3(userBScore3 + 10)}>
-                    10
-                  </button>
-                  <button onClick={() => setUserBScore3(userBScore3 + 15)}>
-                    15
-                  </button>
-                  <button onClick={() => setUserBScore3(userBScore3 + 20)}>
-                    20
-                  </button>
-                  <button onClick={() => setUserBScore3(0)}>reset</button>
-                </div>
-              )}
+          <div className="score_user_seperate">
+            <p className="score_user_totalscore">{userBName}'s Score</p>
+            <p className="score_user_totalscore">{userBScoreTotal}</p>
+            <div className="score_input">
+              <div className="score_each_round">
+                {currentRound === 1 && (
+                  <div className="score_user_name">
+                    <p>Round score: {userBScore1}</p>
+                    <button onClick={() => setUserBScore1(userBScore1 + 0)}>
+                      0 pt
+                    </button>
+                    <button onClick={() => setUserBScore1(userBScore1 + 5)}>
+                      5 pt
+                    </button>
+                    <button onClick={() => setUserBScore1(userBScore1 + 10)}>
+                      10 pt
+                    </button>
+                    <button onClick={() => setUserBScore1(userBScore1 + 15)}>
+                      15 pt
+                    </button>
+                    <button onClick={() => setUserBScore1(userBScore1 + 20)}>
+                      20 pt
+                    </button>
+                    <button onClick={() => setUserBScore1(0)}>reset</button>
+                  </div>
+                )}
+                {currentRound === 2 && (
+                  <div className="score_user_name">
+                    <p>Round score: {userBScore2}</p>
+                    <button onClick={() => setUserBScore2(userBScore2 + 0)}>
+                      0 pt
+                    </button>
+                    <button onClick={() => setUserBScore2(userBScore2 + 5)}>
+                      5 pt
+                    </button>
+                    <button onClick={() => setUserBScore2(userBScore2 + 10)}>
+                      10 pt
+                    </button>
+                    <button onClick={() => setUserBScore2(userBScore2 + 15)}>
+                      15 pt
+                    </button>
+                    <button onClick={() => setUserBScore2(userBScore2 + 20)}>
+                      20 pt
+                    </button>
+                    <button onClick={() => setUserBScore2(0)}>reset</button>
+                  </div>
+                )}
+                {currentRound === 3 && (
+                  <div className="score_user_name">
+                    <p>Round score: {userBScore3}</p>
+                    <button onClick={() => setUserBScore3(userBScore3 + 0)}>
+                      0 pt
+                    </button>
+                    <button onClick={() => setUserBScore3(userBScore3 + 5)}>
+                      5 pt
+                    </button>
+                    <button onClick={() => setUserBScore3(userBScore3 + 10)}>
+                      10 pt
+                    </button>
+                    <button onClick={() => setUserBScore3(userBScore3 + 15)}>
+                      15 pt
+                    </button>
+                    <button onClick={() => setUserBScore3(userBScore3 + 20)}>
+                      20 pt
+                    </button>
+                    <button onClick={() => setUserBScore3(0)}>reset</button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
         {currentRound < 3 && (
           <button
+            className="score_button_finish"
             onClick={() => {
               if (currentRound === 1) {
                 setUserAScoreTotal(userAScoreTotal + Number(userAScore1));
@@ -296,6 +280,7 @@ function Score() {
 
         {currentRound === 3 && (
           <button
+            className="score_button_finish"
             onClick={() => {
               setUserAScoreTotal(userAScoreTotal + Number(userAScore3));
               setUserBScoreTotal(userBScoreTotal + Number(userBScore3));
@@ -318,11 +303,19 @@ function Score() {
       <h2>
         {userBName}'s Score: {userBScoreTotal}
       </h2>
-      {userAScoreTotal > userBScoreTotal && <p>{userAName} Wins!</p>}
-      {userAScoreTotal < userBScoreTotal && <p>{userBName} Wins!</p>}
-      {userAScoreTotal === userBScoreTotal && <p>Tie Game!</p>}
+      {userAScoreTotal > userBScoreTotal && (
+        <p className="score_result_text">{userAName} Wins!</p>
+      )}
+      {userAScoreTotal < userBScoreTotal && (
+        <p className="score_result_text">{userBName} Wins!</p>
+      )}
+      {userAScoreTotal === userBScoreTotal && (
+        <p className="score_result_text">Tie Game!</p>
+      )}
 
-      <button onClick={gameEnd}>Home</button>
+      <button className="score_button_finish" onClick={gameEnd}>
+        Home
+      </button>
     </>
   );
 }

@@ -1,6 +1,8 @@
 import PocketBase from "pocketbase";
 import { useState, useEffect } from "react";
 
+import "./style/Ranking.css";
+
 function Ranking() {
   const [data, setData] = useState([]);
   const pb = new PocketBase("http://127.0.0.1:8090");
@@ -35,8 +37,10 @@ function Ranking() {
       {data.map((data, index) => {
         return (
           <div key={index} className="rank_list">
-            <p className="rank_list_name">{data.Name}</p>
-            <p className="rank_list_score">{data.Score}</p>
+            <div className="rank_list_contents">
+              <p className="rank_list_name">{data.Name}</p>
+              <p className="rank_list_score">{data.Score}</p>
+            </div>
           </div>
         );
       })}

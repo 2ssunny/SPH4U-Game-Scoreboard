@@ -1,3 +1,48 @@
 .App {
   text-align: center;
+  width: 100%;
+  margin-top: 0rem;
+  padding-top: 0rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.App-header {
+  font-size: 3rem;
+  background-color: gray;
+  padding-bottom: 3rem;
+}
+
+.App-header_text {
+  margin-top: 0rem;
+  padding-top: 3rem;
+}
+
+.App-header p {
+  margin-bottom: 0;
+  padding-top: 3rem;
+}
+
+.App-body1 {
+  background-color: gray;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-body2 {
+  background-color: darkolivegreen;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+body {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

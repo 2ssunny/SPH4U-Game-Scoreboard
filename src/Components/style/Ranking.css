@@ -1,0 +1,31 @@
+.rank_content h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 3rem;
+}
+
+.rank_list_contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0.1rem solid rgb(0, 0, 0);
+  border-radius: 5rem;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rank_list_name {
+  font-size: 3rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.rank_list_score {
+  font-size: 1.5rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.8rem;
+}
