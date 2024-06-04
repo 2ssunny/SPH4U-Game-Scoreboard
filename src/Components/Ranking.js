@@ -12,12 +12,11 @@ function Ranking() {
 
     const fetchData = async () => {
       try {
-        const records = await pb.collection("Data").getFullList({
-          sort: "-Score",
-        });
+        const records = await pb.collection("Data").getFullList();
         if (!isCancelled) {
           console.log(records);
-          setData(records);
+          const sortedRecords = records.sort((a, b) => b.Score - a.Score);
+          setData(sortedRecords);
         }
       } catch (error) {
         if (!isCancelled) {
@@ -33,7 +32,7 @@ function Ranking() {
 
   return (
     <div className="rank_content">
-      <h1>Ranking</h1>
+      <h1>Previous Scores</h1>
       {data.map((data, index) => {
         return (
           <div key={index} className="rank_list">
