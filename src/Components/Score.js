@@ -264,11 +264,19 @@ function Score() {
             className="score_button_finish"
             onClick={() => {
               if (currentRound === 1) {
-                setUserAScoreTotal(userAScoreTotal + Number(userAScore1));
-                setUserBScoreTotal(userBScoreTotal + Number(userBScore1));
+                setUserAScoreTotal(
+                  Number(Number(userAScoreTotal) + Number(userAScore1))
+                );
+                setUserBScoreTotal(
+                  Number(Number(userBScoreTotal) + Number(userBScore1))
+                );
               } else if (currentRound === 2) {
-                setUserAScoreTotal(userAScoreTotal + Number(userAScore2));
-                setUserBScoreTotal(userBScoreTotal + Number(userBScore2));
+                setUserAScoreTotal(
+                  Number(Number(userAScoreTotal) + Number(userAScore2))
+                );
+                setUserBScoreTotal(
+                  Number(Number(userBScoreTotal) + Number(userBScore2))
+                );
               }
 
               setCurrentRound(currentRound + 1);
@@ -282,8 +290,12 @@ function Score() {
           <button
             className="score_button_finish"
             onClick={() => {
-              setUserAScoreTotal(userAScoreTotal + Number(userAScore3));
-              setUserBScoreTotal(userBScoreTotal + Number(userBScore3));
+              setUserAScoreTotal(
+                Number(Number(userAScoreTotal) + Number(userAScore3))
+              );
+              setUserBScoreTotal(
+                Number(Number(userBScoreTotal) + Number(userBScore3))
+              );
 
               setGameProcess("Finish");
             }}
