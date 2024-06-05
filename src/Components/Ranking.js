@@ -5,7 +5,8 @@ import "./style/Ranking.css";
 
 function Ranking() {
   const [data, setData] = useState([]);
-  const pb = new PocketBase("http://127.0.0.1:8090");
+  const pb_DataServer = process.env.REACT_APP_PB_SERVER;
+  const pb = new PocketBase(`${pb_DataServer}`);
 
   useEffect(() => {
     let isCancelled = false;

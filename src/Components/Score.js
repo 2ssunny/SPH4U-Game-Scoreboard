@@ -29,7 +29,8 @@ function Score() {
 
   const [gameProcess, setGameProcess] = useState();
 
-  const pb = new PocketBase("http://127.0.0.1:8090");
+  const pb_DataServer = process.env.REACT_APP_PB_SERVER;
+  const pb = new PocketBase(`${pb_DataServer}`);
   pb.autoCancellation(false);
 
   const onClickConfirm = () => {
@@ -258,7 +259,6 @@ function Score() {
             </div>
           </div>
         </div>
-
         {currentRound < 3 && (
           <button
             className="score_button_finish"
